@@ -1,0 +1,39 @@
+<form
+  class="rounded p-4 w-96"
+  #registerForm="ngForm"
+  (ngSubmit)="register()"
+  autocomplete="off"
+>
+  <h2 class="text-center text-2xl font-semibold text-blue-700">Sign Up</h2>
+  <hr class="my-2" />
+  <div class="flex flex-col gap-2 justify-center items-stretch">
+    <input
+      name="username"
+      [(ngModel)]="model.username"
+      class="border p-2 rounded-md text-black placeholder:text-black"
+      placeholder="Username"
+    />
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+      class="border p-2 rounded-md text-black placeholder:text-black"
+      type="password"
+      placeholder="Password"
+    />
+    <div class="flex flex-row gap-2">
+      <button
+        class="border p-2 rounded-md flex-1 bg-green-700 text-white"
+        type="submit"
+      >
+        Sign Up
+      </button>
+      <button
+        class="border p-2 rounded-md flex-1 bg-white text-black"
+        type="button"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

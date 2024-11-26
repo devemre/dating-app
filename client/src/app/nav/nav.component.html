@@ -1,0 +1,51 @@
+<nav
+  class="fixed w-full h-12 bg-gray-900 text-white flex flex-row justify-between items-center gap-4 p-2 px-6"
+>
+  <div class="flex flex-row gap-6 items-center">
+    <h1 class="text-lg">Dating App</h1>
+
+    @if (accountService.currentUser()) {
+    <div class="flex flex-row gap-2">
+      <a routerLink="/users" routerLinkActive="active">Matches</a>
+      <a routerLink="/users" routerLinkActive="active">List</a>
+      <a routerLink="/users" routerLinkActive="active">Messages</a>
+    </div>
+    }
+  </div>
+
+  @if (!accountService.currentUser()) {
+  <form
+    #loginForm="ngForm"
+    (ngSubmit)="login()"
+    class="flex flex-row gap-2 text-black"
+    autocomplete="off"
+  >
+    <input
+      name="username"
+      [(ngModel)]="model.username"
+      class="rounded-md p-1"
+      type="text"
+      placeholder="Username"
+    />
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+      class="rounded-md p-1"
+      type="password"
+      placeholder="Password"
+    />
+    <button class="rounded-md p-1 bg-green-800 px-4 text-white" type="submit">
+      Login
+    </button>
+  </form>
+  } @else {
+  <div class="flex flex-row gap-2">
+    <button
+      class="rounded-md p-1 bg-green-800 px-4 text-white"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
+  }
+</nav>
