@@ -2,13 +2,13 @@
   class="fixed w-full h-12 bg-gray-900 text-white flex flex-row justify-between items-center gap-4 p-2 px-6"
 >
   <div class="flex flex-row gap-6 items-center">
-    <h1 class="text-lg">Dating App</h1>
+    <a routerLink="/" class="text-lg">Dating App</a>
 
     @if (accountService.currentUser()) {
-    <div class="flex flex-row gap-2">
-      <a routerLink="/users" routerLinkActive="active">Matches</a>
-      <a routerLink="/users" routerLinkActive="active">List</a>
-      <a routerLink="/users" routerLinkActive="active">Messages</a>
+    <div class="flex flex-row gap-4 text-gray-300">
+      <a routerLink="/members" routerLinkActive="text-white">Matches</a>
+      <a routerLink="/lists" routerLinkActive="text-white">List</a>
+      <a routerLink="/messages" routerLinkActive="text-white">Messages</a>
     </div>
     }
   </div>
