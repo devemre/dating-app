@@ -1,1 +1,28 @@
-<p>member-detail works!</p>
+@if (member) {
+<div class="p-4 border w-fit flex flex-col gap-4">
+  <h1 class="text-3xl font-semibold">{{ member.knownAs }}</h1>
+  <img class="rounded w-64" [src]="member.photoUrl" alt="" />
+  <div class="flex flex-col gap-2 text-sm">
+    <div>
+      <p class="font-bold">Location:</p>
+      <p>{{ member.city }}, {{ member.country }}</p>
+    </div>
+    <div>
+      <p class="font-bold">Age:</p>
+      <p>{{ member.age }}</p>
+    </div>
+    <div>
+      <p class="font-bold">Last Active:</p>
+      <p>{{ member.lastActive }}</p>
+    </div>
+    <div>
+      <p class="font-bold">Member since:</p>
+      <p>{{ member.created }}</p>
+    </div>
+  </div>
+  <div class="flex flex-row justify-between gap-2">
+    <button class="bg-green-700 text-white rounded-md p-2 w-1/2">Like</button>
+    <button class="bg-blue-700 text-white rounded-md p-2 w-1/2">Message</button>
+  </div>
+</div>
+}

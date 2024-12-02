@@ -1,0 +1,23 @@
+<div
+  class="bg-green-900 text-white border rounded-md shadow-md hover:shadow-xl transition-all hover:bg-green-700"
+>
+  <div>
+    <img
+      class="rounded-t-md w-full h-auto"
+      [src]="member().photoUrl"
+      alt="member().knownAs"
+    />
+  </div>
+  <div class="p-2 text-center">
+    <h1 class="text-lg font-bold">{{ member().knownAs }}</h1>
+    <h5 class="text-sm">{{ member().city }}</h5>
+  </div>
+  <div class="flex p-2 justify-center">
+    <button
+      class="p-2 rounded-md bg-white text-green-900"
+      routerLink="/members/{{ member().userName }}"
+    >
+      Details
+    </button>
+  </div>
+</div>
