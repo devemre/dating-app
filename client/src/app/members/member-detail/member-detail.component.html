@@ -1,28 +1,85 @@
 @if (member) {
-<div class="p-4 border w-fit flex flex-col gap-4">
-  <h1 class="text-3xl font-semibold">{{ member.knownAs }}</h1>
-  <img class="rounded w-64" [src]="member.photoUrl" alt="" />
-  <div class="flex flex-col gap-2 text-sm">
-    <div>
-      <p class="font-bold">Location:</p>
-      <p>{{ member.city }}, {{ member.country }}</p>
+<div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+  <div class="p-4 border flex-4 flex flex-col gap-4">
+    <h1 class="text-3xl font-semibold self-center">{{ member.knownAs }}</h1>
+    <img class="rounded w-64 self-center" [src]="member.photoUrl" alt="" />
+    <div class="flex flex-col gap-2 text-sm">
+      <div>
+        <p class="font-bold">Location:</p>
+        <p>{{ member.city }}, {{ member.country }}</p>
+      </div>
+      <div>
+        <p class="font-bold">Age:</p>
+        <p>{{ member.age }}</p>
+      </div>
+      <div>
+        <p class="font-bold">Last Active:</p>
+        <p>{{ member.lastActive }}</p>
+      </div>
+      <div>
+        <p class="font-bold">Member since:</p>
+        <p>{{ member.created }}</p>
+      </div>
     </div>
-    <div>
-      <p class="font-bold">Age:</p>
-      <p>{{ member.age }}</p>
-    </div>
-    <div>
-      <p class="font-bold">Last Active:</p>
-      <p>{{ member.lastActive }}</p>
-    </div>
-    <div>
-      <p class="font-bold">Member since:</p>
-      <p>{{ member.created }}</p>
+    <div class="flex flex-row justify-between gap-2">
+      <button class="bg-green-700 text-white rounded-md p-2 w-1/2">Like</button>
+      <button class="bg-blue-700 text-white rounded-md p-2 w-1/2">
+        Message
+      </button>
     </div>
   </div>
-  <div class="flex flex-row justify-between gap-2">
-    <button class="bg-green-700 text-white rounded-md p-2 w-1/2">Like</button>
-    <button class="bg-blue-700 text-white rounded-md p-2 w-1/2">Message</button>
+  <div class="flex-8 w-full flex flex-col gap-2">
+    <div class="flex flex-row text-center">
+      <button
+        class="flex-1 border-b transition-colors hover:bg-green-50 hover:border-green-700"
+        [class]="
+          activeTab() === 'About' ? 'border-green-900 text-green-700' : ''
+        "
+        (click)="onTabClick('About')"
+      >
+        About
+      </button>
+      <button
+        class="flex-1 border-b transition-colors hover:bg-green-50 hover:border-green-700"
+        [class]="
+          activeTab() === 'Interests' ? 'border-green-900 text-green-700' : ''
+        "
+        (click)="onTabClick('Interests')"
+      >
+        Interests
+      </button>
+      <button
+        class="flex-1 border-b transition-colors hover:bg-green-50 hover:border-green-700"
+        [class]="
+          activeTab() === 'Photos' ? 'border-green-900 text-green-700' : ''
+        "
+        (click)="onTabClick('Photos')"
+      >
+        Photos
+      </button>
+      <button
+        class="flex-1 border-b transition-colors hover:bg-green-50 hover:border-green-700"
+        [class]="
+          activeTab() === 'Messages' ? 'border-green-900 text-green-700' : ''
+        "
+        (click)="onTabClick('Messages')"
+      >
+        Messages
+      </button>
+    </div>
+    @if (activeTab() === 'About') {
+    <p class="font-bold">Introduction</p>
+    <p>{{ member.introduction }}</p>
+    <p class="font-bold">Looking for</p>
+    <p>{{ member.lookingFor }}</p>
+    } @else if (activeTab() === 'Interests') {
+    <p>{{ member.interests }}</p>
+    } @else if (activeTab() === 'Photos') { @for (photo of member.photos; track
+    $index) {
+    <img class="w-48" [src]="photo.url" alt="" />
+    } } @else if (activeTab() === 'Messages') {
+    <p>Messages</p>
+    }
   </div>
 </div>
 }

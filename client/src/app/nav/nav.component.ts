@@ -16,6 +16,8 @@ export class NavComponent {
   private toastr = inject(ToastrService);
   model: any = {};
 
+  dropdownExpanded = false;
+
   login() {
     this.accountService.login(this.model).subscribe({
       next: (_) => {
@@ -30,5 +32,9 @@ export class NavComponent {
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  toggleDropdown() {
+    this.dropdownExpanded = !this.dropdownExpanded;
   }
 }

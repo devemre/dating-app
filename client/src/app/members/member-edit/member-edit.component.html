@@ -1,0 +1,123 @@
+@if (member) {
+<div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+  <div class="p-4 border flex-4 flex flex-col gap-4">
+    <h1 class="text-3xl font-semibold self-center">{{ member.knownAs }}</h1>
+    <img class="rounded w-64 self-center" [src]="member.photoUrl" alt="" />
+    <div class="flex flex-col gap-2 text-sm">
+      <div>
+        <p class="font-bold">Location:</p>
+        <p>{{ member.city }}, {{ member.country }}</p>
+      </div>
+      <div>
+        <p class="font-bold">Age:</p>
+        <p>{{ member.age }}</p>
+      </div>
+      <div>
+        <p class="font-bold">Last Active:</p>
+        <p>{{ member.lastActive }}</p>
+      </div>
+      <div>
+        <p class="font-bold">Member since:</p>
+        <p>{{ member.created }}</p>
+      </div>
+    </div>
+    <div class="flex flex-row justify-between gap-2">
+      <button
+        [disabled]="!editForm.dirty"
+        form="editForm"
+        type="submit"
+        class="bg-green-700 text-white rounded-md p-2 flex-1 disabled:bg-gray-500 transition-all"
+      >
+        Save Changes
+      </button>
+    </div>
+  </div>
+  <div class="flex-8 w-full flex flex-col gap-4">
+    @if (editForm.dirty) {
+    <div class="border p-4 rounded-md border-green-700 bg-emerald-400">
+      <p>
+        <span class="font-bold">Information:</span> You have made changes. Any
+        unsaved changes will be lost
+      </p>
+    </div>
+    }
+    <div class="flex flex-row text-center">
+      <button
+        class="flex-1 border-b transition-colors hover:bg-green-50 hover:border-green-700"
+        [class]="
+          activeTab() === 'About' ? 'border-green-900 text-green-700' : ''
+        "
+        (click)="onTabClick('About')"
+      >
+        About
+      </button>
+      <button
+        class="flex-1 border-b transition-colors hover:bg-green-50 hover:border-green-700"
+        [class]="
+          activeTab() === 'Photos' ? 'border-green-900 text-green-700' : ''
+        "
+        (click)="onTabClick('Photos')"
+      >
+        Photos
+      </button>
+    </div>
+    <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
+      @if (activeTab() === 'About') {
+      <div class="flex flex-col gap-2">
+        <div>
+          <p class="font-bold">Introduction</p>
+          <textarea
+            class="w-full p-2 mt-1 border rounded-md"
+            name="introduction"
+            rows="6"
+            [(ngModel)]="member.introduction"
+          ></textarea>
+        </div>
+        <div>
+          <p class="font-bold">Looking for</p>
+          <textarea
+            class="w-full p-2 mt-1 border rounded-md"
+            name="lookingFor"
+            rows="6"
+            [(ngModel)]="member.lookingFor"
+          ></textarea>
+        </div>
+        <div>
+          <p class="font-bold">Interests</p>
+          <textarea
+            class="w-full p-2 mt-1 border rounded-md"
+            name="interests"
+            rows="6"
+            [(ngModel)]="member.interests"
+          ></textarea>
+        </div>
+        <div>
+          <p class="font-bold mb-1">Location Details</p>
+          <div class="flex flex-col gap-2 md:flex-row md:gap-4">
+            <div>
+              <p class="font-bold">City</p>
+              <input
+                class="w-full p-2 mt-1 border rounded-md"
+                name="city"
+                [(ngModel)]="member.city"
+              />
+            </div>
+            <div>
+              <p class="font-bold">Country</p>
+              <input
+                class="w-full p-2 mt-1 border rounded-md"
+                name="country"
+                [(ngModel)]="member.country"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      } @else if (activeTab() === 'Photos') { @for (photo of member.photos;
+      track $index) {
+      <img class="w-48" [src]="photo.url" alt="" />
+      } }
+    </form>
+  </div>
+</div>
+}

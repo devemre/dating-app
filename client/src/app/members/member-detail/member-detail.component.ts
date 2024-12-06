@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MembersService } from '../../_services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../_models/member';
@@ -13,6 +13,7 @@ export class MemberDetailComponent implements OnInit {
   private memberService = inject(MembersService);
   private route = inject(ActivatedRoute);
   member?: Member;
+  activeTab = signal('About');
 
   ngOnInit(): void {
     this.loadMember();
@@ -28,5 +29,9 @@ export class MemberDetailComponent implements OnInit {
     this.memberService.getMember(username).subscribe({
       next: (member) => (this.member = member),
     });
+  }
+
+  onTabClick(tab: string) {
+    this.activeTab.set(tab);
   }
 }
