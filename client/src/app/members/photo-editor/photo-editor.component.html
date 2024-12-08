@@ -1,0 +1,5 @@
+<div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+  @for (photo of member().photos; track $index) {
+  <img class="w-48" [src]="photo.url" alt="" />
+  }
+</div>

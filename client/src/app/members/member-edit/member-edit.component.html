@@ -115,7 +115,7 @@
       </div>
       } @else if (activeTab() === 'Photos') { @for (photo of member.photos;
       track $index) {
-      <img class="w-48" [src]="photo.url" alt="" />
+      <app-photo-editor [member]="member"></app-photo-editor>
       } }
     </form>
   </div>
